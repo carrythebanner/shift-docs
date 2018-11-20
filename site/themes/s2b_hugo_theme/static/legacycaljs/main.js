@@ -171,12 +171,6 @@ $(document).ready(function() {
         });
     }
 
-    function viewPedalpaloozaArchive() {
-        var content = $('#pedalpaloozaArchive').html();
-        container.empty().append(content);
-        checkAnchors();
-    }
-
     function dateJump(ev) {
         var e = ev.target;
         if (e.hasAttribute('data-date')) {
@@ -320,7 +314,7 @@ $(document).ready(function() {
             }
         }
     }
-    
+
     //JG - we are no longer sdi -
     // window.onpopstate = function (ev) {
     //     checkRoute(document.location.pathname);
@@ -352,9 +346,9 @@ $(document).ready(function() {
     //     checkRoute( document.location.pathname );
     // }
     //checkAnchors();
-  
+
     //JG - 7/22/2018 exposing some of these rendering functions to the newer interface
-  
+
     console.log("Vincent's main.js - 2");
     window.viewAddEventForm = viewAddEventForm;
     window.viewEvents = viewEvents;
