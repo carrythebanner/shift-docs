@@ -1,6 +1,6 @@
 ---
 title: "Move by Bike events archive"
-date: 2018-11-20T20:20:00-08:00
+date: 2017-11-20T20:20:00-08:00
 draft: false
 weight:
 ---
@@ -16,7 +16,6 @@ weight:
 Sat. Oct 31, 11am leaving from ~44 and NE Going, headed to 35 and Alberta.  Exactly 1 (flat) mile. **Costumes encouraged**.   I have a lot of books, etc: dense heavy boxes, and not a ton of Bound bamboo trailer-worthy furniture and bike parts.  If you like hauling a lot of heavy stuff a short distance, this is the move for you. We could use all the help we can get.  Will have all the usual sweets and savories, uppers and downers, vegan and GF.  We will burn things at the end. **Costumes still encouraged**.  An RSVP on facebook or email would be appreciated so I have a vague idea of how much food to get.
 
 * <a href="https://www.facebook.com/events/1118046878225133">FB listing</a>
-
 * <a href="http://www.shift2bikes.org/cal/viewmonth.php?month=10&year=2015#31-5325">Calendar Listing</a>
 
 ## Ron's Rawk'n Bike Move!
@@ -39,7 +38,7 @@ Cully neighborhood.  Begins at 7655 Ne Sacramento St. Where NE Sacramento St and
 
 Meet at 10:30am for food and coffee, load up around 11:00 to 11:30am. I am moving about two miles north via a relatively flat route. Please bring trailers if you have them, most of what I am moving is in boxes with a couple large pieces of furniture.
 
-##Lance and Becky's Bike Move!
+## Lance and Becky's Bike Move!
 
 **Starting point:** 930 NW 12th Ave
 **Ending point:** SE Ash St.
@@ -57,7 +56,7 @@ Please Pass on to your friends. Thanks so much in advance!!!
 
 See: <a href='http://www.facebook.com/event.php?eid=124934174203802'>Facebook Event Page</a>
 
-##MOVE BY PIRATE BRIGADE
+## MOVE BY PIRATE BRIGADE
 
 **Starting point:** 1705 SE Ellis St
 **Ending point:** 13th & Madison
@@ -71,7 +70,7 @@ Eat at 10:30- Sail at 11:30!
 Dress in yur finest garb and be ready to help Scurrvy Matt's MbB in the afternoon! SAIL HO!
 
 
-##mattbeard's pirate bike move
+## mattbeard's pirate bike move
 
 **Starting point:** 1514 SE Salmon
 **Ending point:** 6446 NE Cleveland
@@ -86,7 +85,7 @@ Fool had 42 people at his bike move - are ye better than that? Can we crew our f
 
 
 
-##fool's late august rhumba
+## fool's late august rhumba
 
 **Starting point:** 2147 NW Glisan
 **Ending point:** 6446 NE Cleveland
@@ -99,7 +98,7 @@ I've got some stuff, and I've got a new house. Could use some help uniting the t
 
 
 
-##Kristin's Muppet Move
+## Kristin's Muppet Move
 
 **Date**: Saturday, Aug. 8
 
@@ -119,7 +118,7 @@ Free pizza and cold beer after the move!
 
 
 
-##Theo's Lumberjack Move By Bike
+## Theo's Lumberjack Move By Bike
 
 **Starting point:** 1825 NE 15th Ave
 **Ending point:** 4037 N Gatenbein
@@ -141,7 +140,7 @@ Optional field trip to the Alberta Art Hop after things are unpacked and lumberj
 
 
 
-##Twilight "Liveinsin" Move
+## Twilight "Liveinsin" Move
 **Starting point:** Ed's House, 1531 SE Spokane St
 **Ending point:** Abode of Emily and Ozge (in NoPo)
 **Date:** May 8, 2009, Friday
@@ -159,7 +158,7 @@ Ed Groth, edward.groth at gmail dat com
 
 
 
-##SHORT 'N SPICY BIKE MOVE
+## SHORT 'N SPICY BIKE MOVE
 **Starting point:** 5007 N. Kerby Ave. Apt. A
 **Ending point:** 4070 NE Mallory
 **Date:** January 31, 2009, Saturday
@@ -167,7 +166,7 @@ Ed Groth, edward.groth at gmail dat com
 **Contact:** Tim, timjimtrue at hotmail daht comm
 
 
-##Sam's Move by Bike
+## Sam's Move by Bike
 
 **Starting point:** NE Rosa Parks Way and Williams
 **Ending point:** SW 16th and Clay
@@ -195,7 +194,7 @@ Thankyou!
 
 
 
-##Microcosm Publishing Move by Bike
+## Microcosm Publishing Move by Bike
 
 **Starting point:** SE 50th Ave and Powell Blvd
 **Ending point:** 9th and Main
@@ -214,7 +213,7 @@ Joe Biel
 
 
 
-##Sierra Club's Move by Bike
+## Sierra Club's Move by Bike
 
 **Starting point:** 2950 SE Stark St, Suite 110
 **Ending point:** 1821 SE Ankeny St
@@ -235,7 +234,7 @@ happen to have a bike trailer to loan though, please send me an email.
 **Report:** Besides receiving food and drink we each were rewarded with compact fluorescent bulbs... Now that's a first!
 
 
-##Lucky Lisa's Move by Bike
+## Lucky Lisa's Move by Bike
 
 **Starting point:** 7th and Jessup (between Killingsworth and Ainsworth)
 **Ending point:** N. Mississippi and Freemont
@@ -257,7 +256,7 @@ Let me know please. And Thank YOu.
 <a href='http://www.flickr.com/photos/ethanjewett/sets/72157606537486208/'>Photos by Ethan</a>
 <a href='http://www.timeknock.org/public/album/?dir=mxb_LisaH_03aug08'>Photos by Tom</a>
 
-##Vancouver to Portland Columbia River Crossing
+## Vancouver to Portland Columbia River Crossing
 
 **Starting point:** Franklin and Evergreen
 **Ending point:** 29th and Main
@@ -272,7 +271,7 @@ My car free friend Brenda in downtown Vancouver is moving this month! She'd love
 
 
 
-##Bonnie's Move by Bike
+## Bonnie's Move by Bike
 
 **Starting point:** 3725 SE Rhine St Apt 10A (access from SE 36th Ave)
 **Ending point:** 5418 SE Gladstone
@@ -289,7 +288,7 @@ Route Map: http://tinyurl.com/4xxuu8
 Please bring a trailer, if you have one. I have lots of furniture and stuff. Did I say lots? Yes!. What do you, most fabulous bike movers, get? Undying Gratitude! Food! Refreshing Beverages! Lots before and after!
 If you've never done this and want to try it out, I've got a mt. bike with rack, panniers, and basket that would fit someone 5'4"- 5'10". You can give it a try!
 
-##Steph and Andy Move
+## Steph and Andy Move
 
 **Starting point:** 4823 NE 11th ave. (between Wygant and Alberta)
 **Ending point:** 5801 N. Albina
@@ -299,7 +298,7 @@ If you've never done this and want to try it out, I've got a mt. bike with rack,
 
 Steph (Noll) and Andy (Sheie) are moving. Hurrah! Bring a trailer, and you will not be disappointed. No one turned away. Furniture? Lot's of it! Books? Trailers full! Banjos? We got em! Donuts and coffee at the beginning (of course!) and veggie chili, snacks, and beverages (beer and not beer) at the end. Move is a flat 1.5 miles to N. Portland. Don't have a trailer? Come anyway. We've got panniers packed full of stuff too. Hope you can join the moving party!
 
-##Emmy's Bike Move
+## Emmy's Bike Move
 
 **Starting point:** NW 25th and Pettygrove (the large brick building)
 **Ending point:** SE 39th and Brooklyn (the ECT house)
@@ -314,7 +313,7 @@ long trek across a yet to be determined bridge :)
 
 Snacks to be provided on-site followed by pizza et cetera at the new place.
 
-##Jeff and Jill's 2nd Move - the Groundhog haul!
+## Jeff and Jill's 2nd Move - the Groundhog haul!
 
 **Starting point:** 4106 SE 28th Pl (on the corner of SE Gladstone)
 **Ending point:** SE 37th and Harrison (between Hawthorne and Division)
@@ -337,14 +336,13 @@ We'll have the usual coffee and pastries to fuel up, followed by pizza and
 libations at the new house.
 
 On the Move List:
-<li>books, shelves, art supplies
-</li>
-<li>big arse items include a computer desk and bed
-</li>
+
+* books, shelves, art supplies
+* big arse items include a computer desk and bed
 
 Hope to see you there!
 
-##Hannah (Leah) Move - the Day After GroundHog's Day
+## Hannah (Leah) Move - the Day After GroundHog's Day
 
 **Starting point:** 1638 SE 12th #207, one block south of Hawthorne
 **Ending point:** 15th and Clinton (short, leisurely ride)
@@ -361,7 +359,7 @@ The move is not only small but short. She is only moving to 15th and Clinton. So
 Ken
 
 
-##Kate and Cosmic's "Masked" Move
+## Kate and Cosmic's "Masked" Move
 
 Kate, is a wigmaker, costumer, actress, dancer extraordinaire. She needs to move it all this 5th of January 2008: the flouncy skirts, the surreal masks, and more than one wig. We're talking a serious stuff parade here, and we're talking only a little over a mile.
 
@@ -373,24 +371,20 @@ Let's not let the month slip by without a proper haul!
 **Time:** 10:30 coffeetime, 11am load up
 
 On the Move List:
-<li><i>dungeon furniture !!!</i>
-</li>
-<li>original masks (limited supply, so come early to snag yours for movetime couture)
-</li>
-<li>make-up and costume-y paraphernalia
-</li>
-<li>chihuahuas (i'm not kidding)
-</li>
-<li>the usual suspects: assortment of office, bedroom, kitchen and living room furniture, boxes, etc.
-</li>
-<li>and... a large outdoor swing (hmmmm, the possibilities . . .)
-</li>
+
+* <i>dungeon furniture !!!</i>
+* original masks (limited supply, so come early to snag yours for movetime couture)
+* make-up and costume-y paraphernalia
+* chihuahuas (i'm not kidding)
+* the usual suspects: assortment of office, bedroom, kitchen and living room furniture, boxes, etc.
+* and... a large outdoor swing (hmmmm, the possibilities . . .)
+
 
 **Contact1:** Kate
 **Contact2:** Steph
 thanks!
 
-##Matt Picio's "Xtreme Cycle" Move
+## Matt Picio's "Xtreme Cycle" Move
 
 Ok, all you folks who want bragging rights, here you go:
 
@@ -421,14 +415,14 @@ Thanks,
 
 
 
-##Aaron's "Exchange Cycle" Move
+## Aaron's "Exchange Cycle" Move
 
 Aaron's moving, to the Community Exchange Cycle Club house!
 
 **WHEN:** Sunday, October 21st, 11:00A
 **MEET AT:** SE 49th & Glenwood, Portland (1/2 mile S of Woodstock)
 **MOVING TO:** approx. SE 40th/Brooklyn
-##Organic Brian's Move
+## Organic Brian's Move
 I'm leaving SE Ankeny, and that makes me SAD. :-(
 I'll be on SE Salmon, that makes me GLAD. :-P
 The way I've been treated by my apartment management makes me MAD. :-?
@@ -437,20 +431,16 @@ Good times and good health soon to be HAD. 8-O
 Hi, I didn't know this was gonna work out until a few hours ago. I'm bailing out of this apartment, to live in a house that isn't mold-infested. I can maybe not look like I have pinkeye in both eyes all the time! I'll no longer be a short walk from Laurelhurst Theater or the awesome park at da Vinci Middle School, but I will be much closer to the Wunderland nickel arcade/Avalon Theater and the awesome park at Sunnyside School.
 
 **Some great reasons to help with this Bike Move:**
-<li>I have some really cute building-mates.
-</li>
-<li>The new house is FAB-U-LOUS.
-</li>
-<li>Brian has lots of cool stuff to play with: 1950's Singer sewing machine, dual-proc zippy computer, many comics by Jhonen Vasquez (well, don't play with those so much as handle like they're original copies of the Biblical scrolls), a stunt kite, an archive of local bike scene paraphernalia.
-</li>
-<li>There will be FREE STUFF.
-</li>
-<li>You would meet Brian's PARENTS, who are in town coincidentally on a visit.
-</li>
+
+* I have some really cute building-mates.
+* The new house is FAB-U-LOUS.
+* Brian has lots of cool stuff to play with: 1950's Singer sewing machine, dual-proc zippy computer, many comics by Jhonen Vasquez (well, don't play with those so much as handle like they're original copies of the Biblical scrolls), a stunt kite, an archive of local bike scene paraphernalia.
+* There will be FREE STUFF.
+* You would meet Brian's PARENTS, who are in town coincidentally on a visit.
 
 Juice and snacks before moving, we'll all go out to SE Belmont for a sit-down lunch afterwards. Oh yes, I've still got a bottle of wine from Jeff's wedding.
 
-##Organic Brian's Move
+## Organic Brian's Move
 **WHEN:** Saturday, August 4th, Noon
 **MEET AT:** 2434 SE Ankeny St. #2
 **DESTINATION:** SE Salmon between 33rd and 34th
@@ -459,7 +449,7 @@ Juice and snacks before moving, we'll all go out to SE Belmont for a sit-down lu
 (pictured Organic Brian and Norm)
 
 
-##Bikini Bike Move
+## Bikini Bike Move
 Love the sun? Love to wear next-to-nothing (or nothing at all)? And drink libations? Let's move some stuff into my new house! Dress as scantily as you'd like and bring water toys if you have 'em. Snacks and beer before the move, and food and beer after.
 
 W00t! Thanks, you sexy cyclists!
@@ -476,7 +466,7 @@ W00t! Thanks, you sexy cyclists!
 **Contact**: Shawn
 
 
-##Wes Kempfer's Movapalooza (or post-pedaloosum) Move by Bike
+## Wes Kempfer's Movapalooza (or post-pedaloosum) Move by Bike
 
 Need relief from that post-pedalpaloosum depression? Try Movapalooza! We'll move that, whatever it is, and as well as some household items.
 
@@ -514,7 +504,7 @@ Sometimes the most radical thing you can do is stay where you are. -- Andy Singe
 
 
 
-##Savannah's Cinco de Mayo Bike Move
+## Savannah's Cinco de Mayo Bike Move
 
 i am having a bike move on saturday, may 5th, 3pm from
 2327 SE Ankeny to a few blocks north of alberta.
@@ -534,7 +524,7 @@ thanks!
 **Reward** - veggie food and drink
 
 
-##Alberta to St. Johns Bike Move
+## Alberta to St. Johns Bike Move
 
 Yes, it will be a long haul but the course is fairly flat and it is quite
 beautiful on the Overlook Ridge.
@@ -566,7 +556,7 @@ babs
 **Theme** -
 **Reward** - shoot baskets and enjoy pizza, wine and beer!
 
-##AaA:aAA to Alberta and Albina: an Alliterative Address
+## AaA:aAA to Alberta and Albina: an Alliterative Address
 
 after allocating an adequate aepoch at Ashlee and Associates' abode, an
 adventurous about-face approaching alternate accommodations ascends.
@@ -594,7 +584,7 @@ delightful!
 www.pedalpaddle.blogspot.com
 
 
-##Kirsty's Aquatic Move
+## Kirsty's Aquatic Move
 
 Thanks to a bunch of lovely folks for responding to my Move by Bike Query. It sounds like there are enough people who'd love to come and help, so it's on! Here are the details.
 
@@ -610,7 +600,7 @@ There will be doughnuts and coffee at the start, and a round at the Horse Brass 
 I hope I haven't forgotten anything. Thanks so much everybody! Kirsty x
 
 
-##FEMA Move-By-Bike: From Disaster Area to NoPo in No Time Flat
+## FEMA Move-By-Bike: From Disaster Area to NoPo in No Time Flat
 
 It's Time to move Ernie Wisner to Higher Ground!
 
