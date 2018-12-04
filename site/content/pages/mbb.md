@@ -14,7 +14,7 @@ menu:
 
 Shifties love to help when it comes to moving the belongings of other bikers. It's a big social event. Typically the movee provides coffee and light snacks before the ride, and beer and a meal at the end. The move doubles as a house warming party. You should definitely help on somebody else's bike move before asking for help on your own move, partly so you know what you're getting involved in and partly for karma. **This is not a moving service for hire. We do this for friendship and good times, not for money.**
 
-Knowing this, if you would like a herd of bike trailers to show-up at your place to assist your move in a pedal-powered way, then you'll want to reach out to interested volunteers [on facebook](https://www.facebook.com/groups/movebybike/).  For the non-facebookers, try [joining the shift listserv](https://lists.riseup.net/www/info/shift) to rally some troops and get some social media help.
+Knowing this, if you would like a herd of bike trailers to show-up at your place to assist your move in a pedal-powered way, then you'll want to reach out to interested volunteers [on facebook](https://www.facebook.com/groups/movebybike/).  For the non-facebookers, try [joining the shift listserv](/pages/email-list/) to rally some troops and get some social media help.
 
 **Please give at least a week's notice.**
 
@@ -26,7 +26,7 @@ Also, check [the calendar](/calendar/) to avoid a conflict with other rides, and
 
 Wanting to give moving by bicycle a try? Here are some tips to get you started:
 
-1. Broadcast the bike move far and wide! Add it to your local bike group's calendar, post it on a blog, do anything you can think of to get the word out. (In Portland, people add it to [Shift's calendar](/calendar/), announce it on the [Shift mailing list](https://lists.riseup.net/www/info/shift), and also send a reminder on that list the day before the move.) It can help to have a theme, like fancy dress, distinguished tie, or puppet/costume. It really is a party on wheels but you have to make this clear in the invitation, because it's not intuitive. Advertise it as a sort of barn-raising.
+1. Broadcast the bike move far and wide! Add it to your local bike group's calendar, post it on a blog, do anything you can think of to get the word out. (In Portland, people add it to [Shift's calendar](/calendar/), announce it on the [Shift mailing list](/pages/email-list/), and also send a reminder on that list the day before the move.) It can help to have a theme, like fancy dress, distinguished tie, or puppet/costume. It really is a party on wheels but you have to make this clear in the invitation, because it's not intuitive. Advertise it as a sort of barn-raising.
 
 2. Be really, really well prepared day-of so that people can just load-up their bikes and ride. 45 minutes is a pretty good loading-up time to shoot for, allowing plenty of time for people to drink coffee and to accomodate latecomers.
 

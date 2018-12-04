@@ -143,12 +143,6 @@ $(document).ready(function() {
         });
     }
 
-    function viewAbout() {
-        var content = $('#aboutUs').html();
-        container.empty().append(content);
-        checkAnchors();
-    }
-
     function viewPedalpalooza() {
         curPage = "viewPedalpalooza";
         var startDate = new Date("June 1, 2018");
