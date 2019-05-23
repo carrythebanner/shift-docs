@@ -135,6 +135,54 @@ URL parameters:
 * `id`: `calevent` event ID
 * `secret`: event password
 
+Success:
+* status code: `200`
+* single object containing key-value pairs of all public and private fields for the event, including a `datestatuses` array of datestatus objects
+* each datestatus object: key-value pairs of all fields for each ride occurrence
+
+Example response:
+
+    {
+      "id": "6245",
+      "title": "Shift to Pedalpalooza Ride",
+      "venue": "director park",
+      "address": "877 SW park",
+      "organizer": "fool",
+      "details": "Have you ever wondered how Pedalpalooza happens every year...and did you know we have a team of programmers who work on the shift calendar and website.  There is a lot of rewarding volunteer work that goes on behind the scenes and we are recruiting for new folks who are interested in helping out next year and beyond.  Come on this ride and we will talk a little bit about the history of shift and try to find you a place to help out in the future.  We will end at a family friendly watering hole.  First round of drinks is on shift.  We will be done by 8 so you can check out other rides.",
+      "time": "18:00:00",
+      "hideemail": "1",
+      "length": null,
+      "timedetails": null,
+      "locdetails": null,
+      "eventduration": "120",
+      "weburl": null,
+      "webname": "shift",
+      "image": "/eventimages/6245.jpg",
+      "audience": "G",
+      "tinytitle": "shift2pedalpalooza",
+      "printdescr": "learn how to get involved with shift and pedalpalooza",
+      "datestype": "O",
+      "area": "P",
+      "featured": false,
+      "printemail": false,
+      "printphone": false,
+      "printweburl": false,
+      "printcontact": false,
+      "email": "example@shift2bikes.org",
+      "phone": null,
+      "contact": null,
+      "datestatuses": [
+        {
+          "id": "9300",
+          "date": "2017-06-05",
+          "status": "A",
+          "newsflash": null
+        }
+      ]
+    }
+
+Errors:
+
 **TODO**
 
 
@@ -142,6 +190,28 @@ URL parameters:
 
 Endpoint:
 * POST `manage_event`
+
+URL parameters:
+* none
+
+Request:
+* content type: multipart/form-data
+* body includes the `id` and `secret`
+
+Example request:
+
+**TODO**
+
+Success:
+* status code: `200`
+* single object containing key-value pairs of all public and private fields for the event, including a `datestatuses` array of datestatus objects
+* each datestatus object: key-value pairs of all fields for each ride occurrence
+
+Example response:
+
+Body of response is the same as for `retrieve_event` endpoint; see above.
+
+Errors:
 
 **TODO**
 
@@ -151,5 +221,22 @@ Endpoint:
 Endpoint:
 * POST `delete_event`
 
+Request:
+* content type: multipart/form-data
+* body includes the `id` and `secret`
+
+Example request:
+
 **TODO**
 
+Example response:
+
+    {
+      "success": true
+    }
+
+**TODO**
+
+Errors:
+
+**TODO**
