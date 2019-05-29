@@ -182,6 +182,22 @@ Example response:
     }
 
 Errors:
+* status code: `200` (yes, still `200`)
+  * **TODO**: change to 404 for invalid id, 410 for valid id but permanently deleted, 400 for other client errors
+* `error`: object containing `message` key
+* `message`: text string explaining the error
+* possible errors
+  * event has been deleted
+  * **TODO**: are there others errors? invalid id, secret not provided, secret invalid, etc?
+
+Example error:
+
+    {
+      "error": {
+        "message": "The Event requested could not be found"
+      }
+    }
+
 
 **TODO**
 
