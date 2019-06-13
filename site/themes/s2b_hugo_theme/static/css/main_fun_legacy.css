@@ -115,6 +115,10 @@ svg.icon {
     width: 100%;
     text-align: left;
     padding: 0;
+    user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -webkit-user-select: text;
 }
 
 .event.featured {
