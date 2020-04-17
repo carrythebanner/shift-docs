@@ -117,7 +117,7 @@ svg.icon {
     padding: 0;
 }
 
-.event.featured {
+.event.featured, .theme.featured {
     background-color: #FCFAF2;
     border: 1px solid #FFDD66;
 }
@@ -149,7 +149,8 @@ svg.icon {
     border-color: #FCFAF2;
 }
 
-.event.featured .featured-text {
+.event.featured .featured-text,
+.theme.featured .featured-text {
     text-align: center;
     font-weight: bold;
     color: #630;

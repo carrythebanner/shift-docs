@@ -21,7 +21,8 @@ $(document).ready(function() {
                     groupedByDate[date] = {
                         yyyymmdd: value.date,
                         date: date,
-                        events: []
+                        events: [],
+                        themes: [],
                     };
                     mustacheData.dates.push(groupedByDate[date]);
                 }
@@ -48,14 +49,43 @@ $(document).ready(function() {
                 value.webLink = container.getWebLink(value.weburl);
                 value.shareLink = '/calendar/event-' + value.caldaily_id;
                 value.exportlink = '/api/ics.php?id=' + value.id;
+                console.log(value);
 
                 // value.showEditButton = true; // TODO: permissions
                 groupedByDate[date].events.push(value);
+            });
+            
+            var themesUrl = '/api/themes.php';
+            $.get( themesUrl, function( data ) {
+                $.each(data.themes, function( index, value ) {
+                    console.log(value);
+                    var date = container.formatDate(value.date);
+                    if (groupedByDate[date] === undefined) {
+                        groupedByDate[date] = {
+                            yyyymmdd: value.date,
+                            date: date,
+                            events: [],
+                            themes: [],
+                        };
+                        mustacheData.dates.push(groupedByDate[date]);
+                    }
+                    groupedByDate[date].themes.push(value);
+                });
             });
 
             for ( var date in groupedByDate )  {
                 groupedByDate[date].events.sort(container.compareTimes);
             }
+
+//             mustacheData.dates[0].themes[0] = 
+//               {
+//                 'title': 'Bike fun?',
+//                 'start': "2020-06-03",
+//                 'url': '/pages/mission_statement/'
+//               };
+            console.log(mustacheData.dates[0].themes);
+            console.log(mustacheData.dates[0].themes.length);
+//             mustacheData.dates[0].themes[0].title = 'Bike fun?';
             var template = $('#view-events-template').html();
             var info = Mustache.render(template, mustacheData);
             callback(info);
