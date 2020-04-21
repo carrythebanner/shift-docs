@@ -54,36 +54,27 @@ $(document).ready(function() {
                 groupedByDate[date].events.push(value);
             });
             
-            var themesUrl = '/api/themes.php';
-            $.get( themesUrl, function( data ) {
-                $.each(data.themes, function( index, value ) {
-                    var date = container.formatDate(value.date);
-                    if (groupedByDate[date] === undefined) {
-                        groupedByDate[date] = {
-                            yyyymmdd: value.date,
-                            date: date,
-                            events: [],
-                            themes: [],
-                        };
-                        mustacheData.dates.push(groupedByDate[date]);
-                    }
-                    groupedByDate[date].themes.push(value);
-                });
+            $.each(data.themes, function( index, value ) {
+                var date = container.formatDate(value.date);
+                if (groupedByDate[date] === undefined) {
+                    groupedByDate[date] = {
+                        yyyymmdd: value.date,
+                        date: date,
+                        events: [],
+                        themes: [],
+                    };
+                    mustacheData.dates.push(groupedByDate[date]);
+                }
+                groupedByDate[date].themes.push(value);
             });
+
+            // TODO fix this, doesn't sort properly yet
+            groupedByDate.sort(container.compareDates);
 
             for ( var date in groupedByDate )  {
                 groupedByDate[date].events.sort(container.compareTimes);
             }
-            mustacheData.dates[0].themes[0] = {
-                'title': 'Bike fun begins!',
-                'start': "2020-06-03",
-                'url': '/pages/mission_statement/'
-            };
-            mustacheData.dates[5].themes[0] = {
-                'title': 'Mystery rides',
-                'date': "2020-06-11",
-                'url': 'https://midnightmysteryride.wordpress.com/'
-            };
+
             var template = $('#view-events-template').html();
             var info = Mustache.render(template, mustacheData);
             callback(info);

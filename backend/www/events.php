@@ -1,5 +1,6 @@
 <?php
 include('../init.php');
+include('../themes_data.php');
 
 /**
  * This endpoint returns a list of events between the GET parameters startdate and enddate of the form:
@@ -70,6 +71,9 @@ if ($enddate < $startdate) {
         }
 
     }
+
+    global $THEMES;
+    $json['themes'] = $THEMES;
 }
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: $ORIGIN");

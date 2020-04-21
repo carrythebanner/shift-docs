@@ -33,28 +33,10 @@
         navLinks: true,
         eventSources: [
           {
-            url: '{{ .Site.BaseURL }}api/themes.php',
+            url: '{{ .Site.BaseURL }}api/events.php',
+            startParam: 'startdate',
+            endParam: 'enddate',
             allDayDefault: true,
-//             events: [
-//               {
-//                 title: "Mystery rides",
-//                 start: "2020-06-12",
-//                 end: "2020-06-12",
-//                 url: "/pedalpalooza/2020-themes/mystery-rides"
-//               },
-//               {
-//                 title: "Bare as you dare",
-//                 start: "2020-06-27",
-//                 end: "2020-06-27",
-//                 url: "/pedalpalooza/2020-themes/naked-rides",
-//               },
-//               {
-//                 title: "Pedalpalooza",
-//                 start: "2020-06-01", // start date is inclusive
-//                 end: "2020-07-01", //end date is exclusive, i.e. ends June 30th
-//                 url: "/pages/pedalpalooza/",
-//               },
-//             ],
             success: function( content ) {
               // our API returns { "themes": [ ] }
               // and this will return just the inner array as fullcalendar expects
