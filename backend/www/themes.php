@@ -24,8 +24,8 @@ include('../init.php');
 $json = array();
 $json['themes'] = array();
 $json['themes'] []= array(
-  'title' => 'Bike fun',
-  'date' => "2020-06-03",
+  'title' => 'Bike fun begins',
+  'date' => "2020-06-01",
   'url' => '/pages/mission_statement/'
 );
 $json['themes'] []= array(

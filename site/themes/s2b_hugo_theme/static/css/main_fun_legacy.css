@@ -150,11 +150,16 @@ svg.icon {
 }
 
 .event.featured .featured-text,
-.theme.featured .featured-text {
+.theme.featured .featured-text,
+.theme.featured .featured-text a {
     text-align: center;
     font-weight: bold;
     color: #630;
     text-transform: uppercase;
+}
+
+.theme.featured .featured-text a {
+    text-decoration: underline;
 }
 
 .event.cancelled del,

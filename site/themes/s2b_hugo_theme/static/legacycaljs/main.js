@@ -49,7 +49,6 @@ $(document).ready(function() {
                 value.webLink = container.getWebLink(value.weburl);
                 value.shareLink = '/calendar/event-' + value.caldaily_id;
                 value.exportlink = '/api/ics.php?id=' + value.id;
-                console.log(value);
 
                 // value.showEditButton = true; // TODO: permissions
                 groupedByDate[date].events.push(value);
@@ -58,7 +57,6 @@ $(document).ready(function() {
             var themesUrl = '/api/themes.php';
             $.get( themesUrl, function( data ) {
                 $.each(data.themes, function( index, value ) {
-                    console.log(value);
                     var date = container.formatDate(value.date);
                     if (groupedByDate[date] === undefined) {
                         groupedByDate[date] = {
@@ -76,16 +74,16 @@ $(document).ready(function() {
             for ( var date in groupedByDate )  {
                 groupedByDate[date].events.sort(container.compareTimes);
             }
-
-//             mustacheData.dates[0].themes[0] = 
-//               {
-//                 'title': 'Bike fun?',
-//                 'start': "2020-06-03",
-//                 'url': '/pages/mission_statement/'
-//               };
-            console.log(mustacheData.dates[0].themes);
-            console.log(mustacheData.dates[0].themes.length);
-//             mustacheData.dates[0].themes[0].title = 'Bike fun?';
+            mustacheData.dates[0].themes[0] = {
+                'title': 'Bike fun begins!',
+                'start': "2020-06-03",
+                'url': '/pages/mission_statement/'
+            };
+            mustacheData.dates[5].themes[0] = {
+                'title': 'Mystery rides',
+                'date': "2020-06-11",
+                'url': 'https://midnightmysteryride.wordpress.com/'
+            };
             var template = $('#view-events-template').html();
             var info = Mustache.render(template, mustacheData);
             callback(info);
