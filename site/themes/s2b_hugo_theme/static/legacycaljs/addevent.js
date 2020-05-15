@@ -134,15 +134,20 @@
                 success: function(returnVal) {
                     var msg = isNew ?
                         'Thank you! A link with a URL to edit and manage the ' +
-                            'event has been emailed to ' + postVars.email +
-                            '. You must click this link for the event to become visible.  If you don\'t receive that email within 20 minutes, please contact bikecal@shift2bikes.org for help.' :
+                            'event has been emailed to ' + postVars.email + '. ' +
+                            'You must click this link for the event to become visible. ' +
+                            'If you don\'t receive that email within 20 minutes, please contact bikecal@shift2bikes.org for help.' :
                         'Your event has been updated!';
 
+                    //if (isNew) {
                     if (returnVal.secret) {
-                        var newUrl = 'edit-' + returnVal.id + '-' + returnVal.secret;
+						//var newUrl = 'edit-' + returnVal.id + '-' + returnVal.secret;
+						var newUrl = 'event-submitted';
 						history.pushState({}, newUrl, newUrl);
+// 						$('.edit-buttons').prop('hidden', true);
+						$('#mustache-html').html('<p>Event submitted! <a href="/calendar/">See all upcoming events</a> or <a href="/addevent/">add another event</a>.</p>');
                         $('#secret').val(returnVal.secret);
-                        msg += ' You may also bookmark the current URL before you click OK.'
+//                         msg += ' You may also bookmark the current URL before you click OK.'
                     }
                     $('#success-message').text(msg);
                     $('#success-modal').modal('show');
