@@ -141,10 +141,8 @@
                 data: data,
                 success: function(returnVal) {
                     var msg = isNew ?
-                        'Thank you! A link with a URL to edit and manage the ' +
-                            'event has been emailed to ' + postVars.email + '. ' +
-                            'You must follow this link and publish the event for it to become visible. ' +
-                            'If you don\'t receive that email within 20 minutes, please contact bikecal@shift2bikes.org for help.' :
+                        'Thank you! Your event has been submitted and will be reviewed. ' +
+                            'Please contact bikecal@shift2bikes.org if you have any questions.' :
                         'Your event has been updated!';
                     if (returnVal.published) {
                         $('.unpublished-event').remove();
@@ -155,7 +153,7 @@
 					    var newUrl = 'event-submitted';
 					    history.pushState({}, newUrl, newUrl);
 					    $('.edit-buttons').prop('hidden', true);
-					    $('#mustache-html').html('<p>Event submitted! Check your email to finish publishing your event.</p><p><a href="/calendar/">See all upcoming events</a> or <a href="/addevent/">add another event</a>.</p>');
+					    $('#mustache-html').html('<p>Event submitted! All submissions are reviewed by our moderators.</p><p><a href="/calendar/">See all upcoming events</a> or <a href="/addevent/">add another event</a>.</p>');
                     }
                     $('#success-message').text(msg);
                     $('#success-modal').modal('show');

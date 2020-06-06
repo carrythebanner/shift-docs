@@ -21,3 +21,5 @@ $IMAGEURL = "/eventimages";
 $SITENAME = "SHIFT to Bikes";
 
 $ORIGIN = "*";
+
+$MODERATOREMAIL = "shift-event-email-archives@googlegroups.com";
