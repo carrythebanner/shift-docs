@@ -3,6 +3,7 @@
 <script src="{{ .Site.BaseURL }}legacycaljs/fullcalendar/timegrid/main.min.js"></script>
 
 {{ partial "cal/scripts.html" . }}
+{{ partial "cal/special-events.html" . }}
 
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
@@ -63,7 +64,48 @@
             }
             return event;
           },
-        }
+        },
+        {
+          events: pedalpaloozaEvents, // from special-events.html
+          allDayDefault: true,
+          color: "#D34212",
+          eventDataTransform: function( eventData ) {
+            var event = {
+                title: eventData.title,
+                start: eventData.start,
+                end: eventData.end,
+                url: eventData.url
+            };
+
+            event.classNames = ["pedalpalooza"];
+            if (eventData.cancelled == true) {
+              event.classNames.push('cancelled');
+            }
+
+            return event;
+          },
+        },
+        {
+          events: bikeMoreChallengeEvents, // from special-events.html
+          allDayDefault: true,
+          color: "#4212D3",
+          eventDataTransform: function( eventData ) {
+            var event = {
+                title: eventData.title,
+                start: eventData.start,
+                end: eventData.end,
+                url: eventData.url
+            };
+
+            event.classNames = ["bike-more-challenge"];
+            if (eventData.cancelled == true) {
+              event.classNames.push('cancelled');
+            }
+
+            return event;
+          },
+        },
+
       ]
     });
 
