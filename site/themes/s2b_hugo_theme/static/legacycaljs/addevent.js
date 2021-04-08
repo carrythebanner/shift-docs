@@ -155,7 +155,7 @@
 					    var newUrl = 'event-submitted';
 					    history.pushState({}, newUrl, newUrl);
 					    $('.edit-buttons').prop('hidden', true);
-					    $('#mustache-html').html('<p>Event submitted! Check your email to finish publishing your event.</p><p><a href="/calendar/">See all upcoming events</a> or <a href="/addevent/">add another event</a>.</p>');
+					    $('#mustache-html').html('<p class="unpublished-event">Event submitted! <strong>Check your email to finish publishing your event.</strong></p><p><a href="/calendar/">See all upcoming events</a> or <a href="/addevent/">add another event</a>.</p>');
                     }
                     $('#success-message').text(msg);
                     $('#success-modal').modal('show');

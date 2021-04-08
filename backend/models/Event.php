@@ -166,8 +166,9 @@ class Event extends fActiveRecord {
         $headers = 'From: bikefun@shift2bikes.org' . "\r\n" .  'Reply-To: bikefun@shift2bikes.org' . "\r\n";
         $subject = "Shift2Bikes Secret URL for " . $this->getTitle();
         $message = "Dear " . $this->getName();
-        $message = $message . ", \r\n\r\nThank you for adding your event, " . $this->getTitle();
-        $message = $message . ", to the Shift Calendar. To activate the event listing, you must visit " . $secret_url . " and publish it.";
+        $message = $message . ", \r\n\r\nThank you for submitting your event, " . $this->getTitle();
+        $message = $message . ", to the Shift Calendar. To activate the event listing, you must visit this link AND publish it:";
+        $message = $message . "\r\n\r\n" . $secret_url;
         $message = $message . "\r\n\r\nThis link is like a password. Anyone who has it can delete and change your event. Please keep this email so you can manage your event in the future.";
         $message = $message . "\r\n\r\nBike on!\r\n\r\n-Shift";
         mail($this->getEmail(), $subject, $message, $headers);
