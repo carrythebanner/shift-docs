@@ -57,16 +57,30 @@ if ($enddate < $startdate) {
 
     if (isset($_GET['id'])) {
         $events = EventTime::getByID($_GET['id']);
+        try {
+            // check if event was found
+            $event = $events[0];
+        }
+        catch (Exception $ex) {
+            http_response_code(404);
+            $json['error'] = array(
+                'message' => "event not found"
+            );
+        }
     }
     else {
         $events = EventTime::getRangeVisible($startdate, $enddate);
     }
 
     foreach ($events as $eventTime) {
-        try{
+        try {
             $json['events'] []= $eventTime->toEventSummaryArray();
         } catch( Exception $ex ) {
-            // For now, ignore
+            http_response_code(500);
+            $message = "unexpected server error";
+            $json['error'] = array(
+                'message' => $message
+            );
         }
 
     }
