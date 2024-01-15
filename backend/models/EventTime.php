@@ -173,7 +173,8 @@ class EventTime extends fActiveRecord {
             'id' => $this->getPkid(), // Get ID for this EventTime
             'date' => $this->getFormattedDate(), // Get pretty date
             'status' => $this->getEventstatus(),
-            'newsflash' => $this->getNewsflash()
+            'newsflash' => $this->getNewsflash(),
+            'url' => $this->getShareable()
         ];
     }
 

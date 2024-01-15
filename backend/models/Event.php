@@ -141,11 +141,22 @@ class Event extends fActiveRecord {
         $this->storeChange();
     }
 
+    private function getEventDates() {
+        $eventDates = array();
+        $eventTimes = $this->buildEventTimes('id');
+        foreach ($eventTimes as $eventTime) {
+            if (!$eventTime->getDeleted()) {
+                $eventDates []= $eventTime->getFormattedDateStatus()['date'];
+            }
+        }
+        return $eventDates;
+    }
+
     private function getEventDateStatuses() {
         $eventDateStatuses = array();
         $eventTimes = $this->buildEventTimes('id');
         foreach ($eventTimes as $eventTime) {
-            // dont send soft deleted events to the client.
+            // don't send soft deleted events to the client.
             // tdb: is there someway to filter this via buildEventTimes()?
             if (!$eventTime->getDeleted()) {
                 $eventDateStatuses []= $eventTime->getFormattedDateStatus();
@@ -178,41 +189,96 @@ class Event extends fActiveRecord {
         $this->setPassword(md5(drupal_random_bytes(32)));
     }
 
-    public function sendConfirmationEmail() {
+    private function getSecretUrl() {
         global $PROTOCOL, $HOST, $PATH;
+
         $base = $PROTOCOL . $HOST . $PATH;
         $base = trim($base, '/'); // remove trailing slashes
-
-        $from_email = "bikefun@shift2bikes.org";
-        $support_email = "bikecal@shift2bikes.org";
-        $moderator_email = "shift-event-email-archives@googlegroups.com";
 
         $event_id = $this->getId();
         $secret = $this->getPassword();
         $secret_url = $base . "/addevent/edit-" . $event_id . "-" . $secret;
 
-        $headers = "From: " . $from_email . "\r\n";
-        $headers .= "Reply-To: " . $support_email . "\r\n";
+        return $secret_url;
+    }
 
-        $subject = "Shift2Bikes Secret URL for " . $this->getTitle();
+    private function getEmailHeaders() {
+        global $EMAIL_FROM, $EMAIL_SUPPORT;
+
+        $headers = "From: " . $EMAIL_FROM . "\r\n";
+        $headers .= "Reply-To: " . $EMAIL_SUPPORT . "\r\n";
+
+        return $headers;
+    }
+
+    public function sendConfirmationEmail() {
+        global $EMAIL_MODERATOR, $HELP_PAGE;
+
+        $headers = $this->getEmailHeaders();
+        $subject = "Confirm Shift calendar listing for " . $this->getTitle();
 
         $blank_line .= "\r\n\r\n";
+
         $message = "Dear " . $this->getName() . ", ";
         $message .= $blank_line;
         $message .= "Thank you for adding your event, " . $this->getTitle();
         $message .= ", to the Shift Calendar. To activate the event listing, you must visit the confirmation link below and publish it:";
         $message .= $blank_line;
-        $message .= $secret_url;
+        $message .= $this->getSecretUrl();
         $message .= $blank_line;
-        $message .= "This link is like a password. Anyone who has it can delete and change your event. Please keep this email so you can manage your event in the future.";
+        $message .= "This link is like a password. Anyone who has it can delete and change your event.";
+        $message .= $blank_line;
+        $message .= "If you need help with your listing, please refer to " . $HELP_PAGE . " or email " . $EMAIL_SUPPORT . ".";
         $message .= $blank_line;
         $message .= "Bike on!";
         $message .= $blank_line;
         $message .= "-Shift";
 
         mail($this->getEmail(), $subject, $message, $headers);
+
         # send backup copy for debugging and/or moderating
-        mail($moderator_email, $subject, $message, $headers);
+        mail($EMAIL_MODERATOR, $subject, $message, $headers);
+    }
+
+    public function sendPublishedEmail() {
+        global $EMAIL_SUPPORT, $HELP_PAGE;
+
+        $headers = $this->getEmailHeaders();
+        $subject = "Event published: " . $this->getTitle();
+
+        $blank_line .= "\r\n\r\n";
+
+        $message = "Congratulations, " . $this->getName() . "!";
+        $message .= $blank_line;
+        $message .= "Your event has been published to the Shift Calendar: ";
+        $message .= $blank_line;
+        $message .= "Event: " . $this->getTitle() . "\r\n";
+        $message .= "Location: " . $this->getLocname() . ", " . $this->getAddress() . "\r\n";
+        $message .= "Time: " . $this->getEventtime() . "\r\n";
+        // TODO: format event time as "5:00 PM" (currently "17:00:00")
+        // $message .= "Time: " . strval( DateTime::createFromFormat('h:i A', $this->getEventtime()) ) . "\r\n";
+        $eventDates = $this->getEventDates();
+        if (count($eventDates) == 1) {
+            $message .= "Date: ";
+        } else {
+            $message .= "Dates: ";
+        }
+        // TODO: format event date as "Feb 1, 2024" (currently "2024-02-01")
+        $message .= implode(", ", $eventDates);
+
+        $message .= $blank_line;
+        $message .= "This is the secret URL for managing your event: " . "\r\n";
+        $message .= $this->getSecretUrl();
+        $message .= $blank_line;
+        $message .= "This link is like a password. Anyone who has it can delete and change your event. Please keep this email so you can manage your event in the future.";
+        $message .= $blank_line;
+        $message .= "If you need help with your listing, please refer to " . $HELP_PAGE . " or email " . $EMAIL_SUPPORT . ".";
+        $message .= $blank_line;
+        $message .= "Bike on!";
+        $message .= $blank_line;
+        $message .= "-Shift";
+
+        mail($this->getEmail(), $subject, $message, $headers);
     }
 
     public function isPublished() {
@@ -222,6 +288,7 @@ class Event extends fActiveRecord {
     public function setPublished() {
         if ($this->getHidden() != 0) {
             $this->setHidden(0);
+            $this->sendPublishedEmail();
         }
     }
 
