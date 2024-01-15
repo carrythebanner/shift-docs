@@ -254,20 +254,27 @@ class Event extends fActiveRecord {
         $message .= $blank_line;
         $message .= "Event: " . $this->getTitle() . "\r\n";
         $message .= "Location: " . $this->getLocname() . ", " . $this->getAddress() . "\r\n";
-        $message .= "Time: " . $this->getEventtime() . "\r\n";
-        // TODO: format event time as "5:00 PM" (currently "17:00:00")
-        // $message .= "Time: " . strval( DateTime::createFromFormat('h:i A', $this->getEventtime()) ) . "\r\n";
+
+        $eventTime = $this->getEventtime();
+        $eventTime = date('g:i A', strtotime($eventTime)); // e.g. "7:00 PM"
+        $message .= "Time: " . $eventTime . "\r\n";
+
+        // TODO:
+        // if you change the number of occurrences before publishing (adding or removing), 
+        // the changes are saved but aren't reflected here
         $eventDates = $this->getEventDates();
         if (count($eventDates) == 1) {
             $message .= "Date: ";
         } else {
             $message .= "Dates: ";
         }
-        // TODO: format event date as "Feb 1, 2024" (currently "2024-02-01")
+        foreach ($eventDates as &$eventDate) { // note leading `&`; modifies array in-place
+            $eventDate = date('M j', strtotime($eventDate)); // "Feb 3"
+        }
         $message .= implode(", ", $eventDates);
-
         $message .= $blank_line;
-        $message .= "This is the secret URL for managing your event: " . "\r\n";
+        $message .= "This is the secret URL for managing your event: ";
+        $message .= $blank_line;
         $message .= $this->getSecretUrl();
         $message .= $blank_line;
         $message .= "This link is like a password. Anyone who has it can delete and change your event. Please keep this email so you can manage your event in the future.";
