@@ -262,6 +262,8 @@ class Event extends fActiveRecord {
         // TODO:
         // if you change the number of occurrences before publishing (adding or removing), 
         // the changes are saved but aren't reflected here
+        // TODO:
+        // sort chronologically; currently sorted by caldaily_id
         $eventDates = $this->getEventDates();
         if (count($eventDates) == 1) {
             $message .= "Date: ";
