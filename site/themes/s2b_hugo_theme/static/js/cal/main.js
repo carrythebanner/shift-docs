@@ -73,11 +73,14 @@ $(document).ready(function() {
         var data = new FormData();
         data.append('json', JSON.stringify({
             id: id,
-            secret: secret
+//             foo: 'bar'
+//             secret: secret
+//             secret: 'fake-data'
         }));
         var opts = {
             type: 'POST',
             url: '/api/delete_event.php',
+            headers: { 'Secret': 'fake-header' },
             contentType: false,
             processData: false,
             cache: false,

@@ -54,17 +54,20 @@ function daysInRange($startdate, $enddate) {
 
 if ($enddate < $startdate) {
     $message = "enddate: " . date('Y-m-d', $enddate) . " is before startdate: " . date('Y-m-d', $startdate);
-    $json = text_error( $message );
+    $json = text_error( $message, 422 );
     
 } elseif (daysInRange($startdate, $enddate) > 100) {
     $message = "event range too large: " . daysInRange($startdate, $enddate) . " days requested; max 100 days";
-    $json = text_error( $message );
+    $json = text_error( $message, 413 );
 
 } else {
     $json['events'] = array();
 
     if (isset($_GET['id'])) {
         $events = EventTime::getByID($_GET['id']);
+        if (count($events) === 0) {
+            $json = text_error('Event not found', 404);
+        }
     }
     else {
         $events = EventTime::getRangeVisible($startdate, $enddate);
@@ -81,4 +84,5 @@ if ($enddate < $startdate) {
 }
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: $ORIGIN");
+header("API-Version: 2.0.0");
 fJSON::output($json);  // https://flourishlib.com/api/fJSON.html

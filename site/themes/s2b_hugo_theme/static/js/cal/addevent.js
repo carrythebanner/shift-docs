@@ -10,9 +10,15 @@
         if (id && secret) {
             // TODO: loading spinner
             $.ajax({
-                url: '/api/retrieve_event.php?id=' + id + "&secret=" + secret,
+                url: '/api/retrieve_event.php?id=' + id, // + "&secret=" + secret,
                 type: 'GET',
+                headers: { 'Secret': secret },
                 success: function(data) {
+                    // TODO 
+                    // this populates the hidden input element with the event secret
+                    // not needed if we send secret in header?
+                    // does it make sense to keep the secret out of the data,
+                    // so it's never part of the payload coming to/from server?
                     data.secret = secret;
                     data.readComic = true;
                     data.codeOfConduct = true;
@@ -162,10 +168,13 @@
             var opts = {
                 type: 'POST',
                 url: '/api/manage_event.php',
+                headers: { 'Secret': secret }, // TODO send secret in header or data?
                 contentType: false,
                 processData: false,
                 cache: false,
-                data: data,
+                // TODO secret is also in data payload; remove?
+                // see <input type="hidden" name="secret" id="secret" value="...">
+                data: data, 
                 success: function(returnVal) {
                     if (returnVal.published) {
                         $('.unpublished-event').remove();

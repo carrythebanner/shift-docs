@@ -20,11 +20,13 @@ if (!isset($_GET['id'])) {
 } else {
     $event = Event::getByID($_GET['id']);
     if (!$event) {
-        $response = text_error('Event not found');
+        $response = text_error('Event not found', 404);
     } else if ($event->isDeleted()) {
-        $response = text_error('Event was deleted');
+        $response = text_error('Event was deleted', 404);
     } else {
-        $secret_valid = $event->secretValid($_GET['secret']);
+        $secret = $_SERVER['HTTP_SECRET'];
+        $secret_valid = $event->secretValid($secret);
+        // $secret_valid = $event->secretValid($_GET['secret']);
         $response = $event->toDetailArray($secret_valid);
     }
 }

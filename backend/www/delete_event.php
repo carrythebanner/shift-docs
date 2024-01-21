@@ -30,7 +30,7 @@ function build_json_response() {
     }
 
     if (!$data['id']) {
-        return text_error('Missing ID');
+        return text_error('Missing ID', 422);
     }
 
     // get the event.
@@ -38,12 +38,37 @@ function build_json_response() {
 
     // verify the event exists.
     if (!$event) {
-        return text_error('Event not found');
+        return text_error('Event not found', 404);
     }
 
     // validate the password.
-    if (!$event->secretValid($data['secret'])) {
-        return text_error('Invalid secret, use link from email');
+
+    if ($_SERVER['HTTP_SECRET']) {
+        // use the secret provided in request header, if found
+        $secret = $_SERVER['HTTP_SECRET'];
+    } else {
+        // otherwise use the one in the request data payload
+        $secret = $data['secret'];
+    }
+
+    // if (!$data['secret']) {
+    if (!$secret) {
+        // 401 response is most accurate here, but per the spec we need to provide add'l info in the response:
+        // https://httpwg.org/specs/rfc9110.html#status.401
+        // "The server generating a 401 response MUST send a WWW-Authenticate header field containing at least one challenge applicable to the target resource."
+        // header('WWW-Authenticate: Basic realm="event"');
+        // response: 'Authorization: Basic {base64 encoding of `username:password`}]'
+        // since we don't have usernames and event secret is the password, it would be a base64 encoding of `:secret`
+        // this works, but pops a basic auth UI: 
+        // header('WWW-Authenticate: Basic realm="event"');
+        // return text_error('Missing secret', 401);
+        return text_error('Missing secret', 403);
+    }
+
+    if (!$event->secretValid($secret)) {
+    // if (!$event->secretValid($data['secret'])) {
+        $secret_valid = $event->secretValid($secret);
+        return text_error('Invalid secret, use link from email', 403);
     }
 
     // if the event was never published, we can delete it completely.
@@ -52,17 +77,19 @@ function build_json_response() {
             $event->delete();
         } catch(Exception $ex) {
             error_log("couldn't delete event" . $ex->getMessage());
-            return text_error('Server error');
+            return text_error('Server error', 500);
         }
     } else {
         try{
             $event->deleteEvent();
         } catch(Exception $ex) {
             error_log("couldn't cancel event " . $ex->getMessage());
-            return text_error('Server error');
+            return text_error('Server error', 500);
         }
     }
-    return array('success' => true);
+    // return array('success' => true);
+    http_response_code(204);
+    return; // null; no body returned if success
 }
 
 ob_start();

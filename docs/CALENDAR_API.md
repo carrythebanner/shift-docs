@@ -273,22 +273,19 @@ Example request:
     }
 
 Success:
-* status code: `200`
-* `success` true message
+* status code: `204`
 
 Example response:
 
-    {
-        "success": true
-    }
+(no body)
 
 Errors:
-* status code: `400`
+* status codes: `400`, `403`, `404`
 * possible errors
-  * no request body or not parseable JSON
-  * `id` not included
-  * invalid `id`
-  * invalid or missing `secret`
+  * no request body or not parseable JSON (`400`)
+  * `id` not included (`400`)
+  * invalid `id` (`404`)
+  * invalid or missing `secret` (`403`)
 
 Example error:
 
