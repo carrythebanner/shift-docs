@@ -50,6 +50,7 @@
             shiftEvent.lengthOptions.push(item);
         }
 
+        /*
         shiftEvent.timeOptions = [];
         meridian = 'AM';
         for ( h = 0; h < 24; h++ ) {
@@ -87,6 +88,7 @@
             // 0 = 12:00am, 1 = 12:15am, 2 = 12:30am, ... 68 = 5:00pm
             shiftEvent.timeOptions[68].isSelected = true;
         }
+        */
 
         if (!shiftEvent.audience) {
             shiftEvent.audience = 'G';

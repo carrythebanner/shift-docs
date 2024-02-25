@@ -222,11 +222,16 @@
 
             <div class="form-group">
               <label class="control-label req-label" for="time">Time</label>
+              <!-- works, but displays seconds when editing an event because the value coming back from the server contains seconds -->
+              <!-- TODO truncate seconds value when JSON output is constructed on the backend -->
+              <input type="time" class="form-control" name="time" id="time" aria-describedby="time-help" [[#time]]value="[[time]]"[[/time]] [[^time]]value="17:00"[[/time]]>
+              <!--
               <select name="time" class="form-control" id="time" aria-describedby="time-help">
                 [[# timeOptions ]]
                 <option value="[[time]]" [[# isSelected ]]selected[[/ isSelected ]]>[[time]]</option>
                 [[/ timeOptions ]]
               </select>
+              -->
               <p class="input-help" id="time-help">If your event has multiple times (for example, a "meet time" and a "ride time"), put the first time here. Describe the later times in the time details field, below.</p>
             </div>
 
