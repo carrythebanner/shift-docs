@@ -1,4 +1,21 @@
 /* your styles go here */
+:root {
+  --primary-accent: #FF9819;
+  --link-focus: #e57e00;
+/*
+  our customizations are not 1:1 with Universal theme:
+  --navbar-border-top: #20616d;
+  --button-border: #2a7d8c;
+  --navbar-focus: #80cbd9;
+*/
+
+/*
+  not customized:
+  --link-hover-bg: #2c8494;
+  --form-shadow: rgba(56, 167, 187, 0.6);
+  --pagination-bg: #a7dbe5;
+*/
+}
 
 .box-image-text .image {
   min-height: 200px;
