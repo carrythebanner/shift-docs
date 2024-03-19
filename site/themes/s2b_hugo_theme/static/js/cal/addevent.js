@@ -11,9 +11,10 @@
     $.fn.getAddEventForm = function(id, secret, callback) {
         if (id && secret) {
             // TODO: loading spinner
-            $.ajax({
-                url: '/api/retrieve_event.php?id=' + id + "&secret=" + secret,
+            var opts = {
                 type: 'GET',
+                url: '/api/retrieve_event.php?id=' + id + "&secret=" + secret,
+                headers: { 'API-Version': API_VERSION },
                 success: function(data) {
                     data.secret = secret;
                     data.readComic = true;
@@ -23,7 +24,8 @@
                 error: function(data) {
                     callback( data.responseJSON.error.message );
                 }
-            });
+            };
+            $.ajax(opts);
         } else {
             populateEditForm({ datestatuses: [] }, callback);
         }
@@ -381,6 +383,7 @@
         var opts = {
             type: 'POST',
             url: '/api/delete_event.php',
+            headers: { 'API-Version': API_VERSION },
             contentType: false,
             processData: false,
             cache: false,
