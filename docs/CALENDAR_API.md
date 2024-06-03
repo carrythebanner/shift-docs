@@ -24,6 +24,7 @@ Endpoint:
 Example requests:
 * `/events.php?startdate=2019-06-01&enddate=2019-06-15`
 * `/events.php?id=1234`
+* `/events.php?listing_id=1001`
 
 URL parameters:
 * `startdate`:
@@ -35,18 +36,21 @@ URL parameters:
   * `YYYY-MM-DD` format
   * if not provided, current date is used
 * `id`:
-  * `caldaily` event ID
-  * if `id` is provided, it takes precedence over `startdate` and `enddate`; the date range will be ignored
+  * `caldaily` event ID (for a single event occurrence)
+  * if `id` is provided, and error will be thrown if `listing_id`, `startdate`, or `enddate` are also provided
+* `listing_id`:
+  * `calevent` event ID (for all event occurrences in a series)
+  * if `listing_id` is provided, it takes precedence over `startdate` and `enddate`; the date range will be ignored
 
 Unknown parameters are ignored.
 
-It is recommended that you always provide either an event `id` or both `startdate` and `enddate`. Relying on default or inferred values may return unexpected results.
+It is recommended that you always provide either an event `id`, a `listing_id`, or both `startdate` and `enddate`. Relying on default or inferred values may return unexpected results.
 
 Success:
 * status code: `200`
-* `events`: array of event objects; array may be empty
+* `events`: array of event objects; for date range requests, the array may be empty
 * each event object: key-value pairs of all available public fields; does not contain any private fields (use `manage_event` endpoint for those)
-* when using `id` parameter, array is expected to return 1 object; if the ID does not match a known event, you will receive a `200` response with an empty `events` array
+* `paingation`: for date range and `listing_id` requests, an object containing metadata about the returned set of events; omitted when a single event by `id` is requested
 
 Example response for a single event:
 
@@ -54,6 +58,7 @@ Example response for a single event:
       "events": [
         {
           "id": "6245",
+          "listing_id": "6245",
           "title": "Shift to Pedalpalooza Ride",
           "venue": "director park",
           "address": "877 SW park",
@@ -91,29 +96,61 @@ Example response for a single event:
       ]
     }
 
-Example response for a range of events: 
+Example response for a range of events by date:
 
     {
       "events": [
         {
-          "id": "1234",
+          "caldaily_id": "1234",
+          "date": "2024-07-02",
           ...
         },
         {
-          "id": "1236",
+          "caldaily_id": "1236",
+          "date": "2024-07-06",
           ...
         },
         {
-          "id": "2200",
+          "caldaily_id": "1237",
+          "date": "2024-07-11",
           ...
         }
-      ], 
+      ],
       "pagination": {
-        "start": "2024-07-01",
-        "end": "2024-07-11",
-        "range": 10,
+        "startdate": "2024-07-01",
+        "enddate": "2024-07-11",
+        "days": 10,
         "events": 3,
         "next": "https://www.shift2bikes.org/api/events.php?startdate=2024-07-12&enddate=2024-07-22"
+      }
+    }
+
+Example response for a series of events:
+
+    {
+      "events": [
+        {
+          "listing_id": "1001",
+          "caldaily_id": "1234",
+          ...
+        },
+        {
+          "listing_id": "1001",
+          "caldaily_id": "1236",
+          ...
+        },
+        {
+          "listing_id": "1001",
+          "caldaily_id": "1237",
+          ...
+        }
+      ],
+      "pagination": {
+        "startdate": "2024-06-01",
+        "enddate": "2024-08-01",
+        "days": 61,
+        "events": 3,
+        "next": null
       }
     }
 
@@ -124,6 +161,9 @@ Errors:
 * possible errors
   * `enddate` before `startdate`
   * date range too large (100 days maximum)
+  * when `id` is provided, if `listing_id`, `startdate`, and/or `enddate` are also provided
+  * when `id` is provided, if `id` does not match a known event
+  * when `listing_id` is provided, if `listing_id` does not match a known listing
 
 Example error:
 
@@ -139,18 +179,22 @@ Example error:
 Endpoint:
 * GET `ics`
 
-Example request:
+Example requests:
 * `/ics.php?id=1234`
+* `/ics.php?listing_id=1001`
 
 URL parameters:
-* `id`: `calevent` event ID
+* `id`: `calevent` ID (deprecated ‡)
+* `listing_id`: `calevent` ID
+
+‡ **Note:** In the future, the `id` parameter will instead be used for a single occurrence (`caldaily` event ID). If you want the current `id` response for a series of events, use `listing_id` instead.
 
 Errors:
-* status code: `404`
+* status codes: `400`, `404`
 * possible errors
-  * no `id` specified
-  * `id` not found? (**TODO**: verify)
-
+  * `id` not found
+  * `listing_id` not found
+  * both `id` and `listing_id` provided
 
 ### Crawling an event
 
@@ -209,6 +253,9 @@ Errors:
 
 Endpoint:
 * GET `retrieve_event`
+
+Example request:
+* `/retrieve_event.php?id=1234&secret=1234567890abcdef1234567890abcdef`
 
 URL parameters:
 * `id`: `calevent` event ID
@@ -520,3 +567,4 @@ As with v1, there were probably revisions to v2 during this time, but changelog 
 * 3.50.1: (2024-04-29) Improved validation of data payloads for manage/delete event endpoint requests
 * 3.50.2: (2024-05-06) Fixed handling of some boolean fields which may unexpectedly be null (hidden, highlight, printemail, etc)
 * 3.51.0: (2024-05-20) Removed now-unused PHP
+* 3.52.0: (2024-06-10) Add `listing_id` to event object in events endpoint (`calevent_id`, aka series ID); all occurrences in a series may also be requested as with `events?listing_id=1234`

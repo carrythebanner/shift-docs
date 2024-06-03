@@ -16,45 +16,47 @@ const methods =  {
     }
 
     let out = {
-      id        : this.id.toString(),
-      title     : this.title,
-      venue     : this.locname,
-      address   : this.address,
-      organizer : this.name,
-      details   : this.descr,
+      id            : this.id.toString(),
+      // listing/series id with clearer name to disambiguate vs caldaily_id
+      listing_id    : this.id.toString(),
+      title         : this.title,
+      venue         : this.locname,
+      address       : this.address,
+      organizer     : this.name,
+      details       : this.descr,
       // note: the driver keeps 'time' as a string
       // ex. "19:00:00"
       // ( 'timestamp', 'datetime', 'date' are converted to js Date )
-      time        : this.eventtime,
-      hideemail   : this.hideemail != 0,       // true if never set
-      hidephone   : this.hidephone != 0,       // true if never set
-      hidecontact : this.hidecontact != 0,     // true if never set
-      length      : null,
-      timedetails : this.timedetails,
-      locdetails  : this.locdetails,
-      loopride    : !!this.loopride,    // false if never set ( null )
-      locend      : this.locend,
+      time          : this.eventtime,
+      hideemail     : this.hideemail != 0,       // true if never set
+      hidephone     : this.hidephone != 0,       // true if never set
+      hidecontact   : this.hidecontact != 0,     // true if never set
+      length        : null,
+      timedetails   : this.timedetails,
+      locdetails    : this.locdetails,
+      loopride      : !!this.loopride,    // false if never set ( null )
+      locend        : this.locend,
       eventduration : duration,
-      weburl      : this.weburl,
-      webname     : this.webname,
+      weburl        : this.weburl,
+      webname       : this.webname,
       // note: the php version *moves* the file here.
       // it feels wrong to do this on get --
       // and not doing it here can only affect legacy events
       // which havent been viewed in recent years...
       // and that seems okay.
-      image       : config.image.url(this.image),
-      audience    : this.audience,
-      tinytitle   : this.tinytitle,
-      printdescr  : this.printdescr,
-      datestype   : this.datestype,
-      area        : this.area,
-      featured    : !!this.highlight,    // false if never set ( null )
-      printemail  : !!this.printemail,   // false if never set ( null )
-      printphone  : !!this.printphone,   // false if never set ( null )
-      printweburl : !!this.printweburl,  // false if never set ( null )
-      printcontact: !!this.printcontact, // false if never set ( null )
-      published   : this.isPublished(),
-      safetyplan  : !!this.safetyplan,   // false if never set ( null )
+      image         : config.image.url(this.image),
+      audience      : this.audience,
+      tinytitle     : this.tinytitle,
+      printdescr    : this.printdescr,
+      datestype     : this.datestype,
+      area          : this.area,
+      featured      : !!this.highlight,    // false if never set ( null )
+      printemail    : !!this.printemail,   // false if never set ( null )
+      printphone    : !!this.printphone,   // false if never set ( null )
+      printweburl   : !!this.printweburl,  // false if never set ( null )
+      printcontact  : !!this.printcontact, // false if never set ( null )
+      published     : this.isPublished(),
+      safetyplan    : !!this.safetyplan,   // false if never set ( null )
       // note: (null==0) is false, so this wont include email, etc. by default.
       email: (this.hideemail == 0 || includePrivate) ? this.email : null,
       phone: (this.hidephone == 0 || includePrivate) ? this.phone : null,

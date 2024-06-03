@@ -31,20 +31,50 @@ const { CalDaily } = require("../models/calDaily");
 // the events endpoint:
 exports.get = function(req, res, next) {
   let id = req.query.id;
+  let listing_id = req.query.listing_id;
   let start = req.query.startdate;
   let end = req.query.enddate;
-  if (id && start && end) {
-    res.textError("expected only an id or date range"); // fix, i think its supposed be sending a json error.
+
+  if (id && (start || end || listing_id)) {
+    res.textError("expected only an id, listing_id, or date range"); // fix, i think its supposed be sending a json error.
   } else if (id) {
     // return the summary of a particular daily event:
     return CalDaily.getByDailyID(id).then((daily) => {
       if (!daily) {
-        res.textError("no such time");
+        res.textError("no such event");
       } else  {
         return getSummaries([daily]).then((events) => {
           res.set(config.api.header, config.api.version);
           res.json({
             events
+          });
+        });
+      }
+    }).catch(next);
+  } else if (listing_id) {
+    // return the event(s) in a series:
+    return CalDaily.getByEventID(listing_id).then((dailies) => {
+      if (dailies.length == 0) {
+        res.textError("no such listing");
+      } else {
+        return getSummaries(dailies).then((events) => {
+          // may not be in chronological order, so sort ascending
+          events.sort((a, b) => fromYMDString(a.date).diff(fromYMDString(b.date)));
+
+          // TODO should *not* include unpublished or deleted occurrences; test to verify
+          // TODO *should* include cancelled occurrences; test to verify
+
+          // returns all events in a series, regardless of how large a date range that covers;
+          // TODO allow listing_id requests to optionally filter down further by specifying a date range?
+          let start = fromYMDString(events[0].date);
+          let end = fromYMDString(events[events.length - 1].date);
+          const pagination = getPagination(start, end, events.length);
+          pagination.next = null;
+
+          res.set(config.api.header, config.api.version);
+          res.json({
+            events,
+            pagination,
           });
         });
       }
@@ -117,9 +147,9 @@ function getPagination(firstDay, lastDay, count) {
   const next = getEventRangeUrl(nextRangeStart, nextRangeEnd);
 
   return {
-    start: toYMDString(firstDay),
-    end: toYMDString(lastDay),
-    range, // tbd: do we need to send this? can client determine from start, end?
+    startdate: toYMDString(firstDay),
+    enddate: toYMDString(lastDay),
+    days: range, // tbd: do we need to send this? can client determine from start, end?
     events: count,
     next,
   };

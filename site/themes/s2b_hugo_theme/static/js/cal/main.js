@@ -43,7 +43,7 @@ $(document).ready(function() {
                 value.contactLink = container.getContactLink(value.contact);
 
                 value.shareLink = '/calendar/event-' + value.caldaily_id;
-                value.exportlink = '/api/ics.php?id=' + value.id;
+                value.exportlink = '/api/ics.php?listing_id=' + value.listing_id;
 
                 groupedByDate[date].events.push(value);
             });

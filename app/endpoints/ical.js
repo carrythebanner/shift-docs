@@ -31,7 +31,15 @@ module.exports = {
 };
 
 function get(req, res, next) {
-  const id = req.query.id; // a cal event id
+  let id = req.query.id; // a calevent id; deprecated, use listing_id
+  let listing_id = req.query.listing_id; // a calevent id
+
+  if (id && listing_id) {
+    res.textError("provide only id or listing_id");
+  } else if (listing_id) {
+    id = listing_id; // prefer listing_id over id, if provided
+  }
+
   const start = req.query.startdate || "";
   const end = req.query.enddate || "";
   const customName = req.query.filename || "";
