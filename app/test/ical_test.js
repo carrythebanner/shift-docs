@@ -78,7 +78,21 @@ describe("ical feed", () => {
     chai.request( app )
       .get('/api/ical.php')
       .query({
-         id: 2, // an event id
+         id: 201, // a single event id; TODO where does this id come from?
+       })
+      .end(function (err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        // expect(res).to.have.header('content-type', 'text/calendar');
+        expect(res.text).to.equal(allEvents);
+        done();
+      });
+  });
+  it("provides the events of a series", function(done) {
+    chai.request( app )
+      .get('/api/ical.php')
+      .query({
+         listing_id: 2, // an event series id
        })
       .end(function (err, res) {
         expect(err).to.be.null;
