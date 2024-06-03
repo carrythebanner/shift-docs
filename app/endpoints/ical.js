@@ -31,20 +31,14 @@ module.exports = {
 };
 
 function get(req, res, next) {
-  let id = req.query.id; // a calevent id; deprecated, use listing_id
-  let listing_id = req.query.listing_id; // a calevent id
-
-  if (id && listing_id) {
-    res.textError("provide only id or listing_id");
-  } else if (listing_id) {
-    id = listing_id; // prefer listing_id over id, if provided
-  }
+  let id = req.query.id; // caldaily id of a single event
+  let listing_id = req.query.listing_id; // calevent id of an event series
 
   const start = req.query.startdate || "";
   const end = req.query.enddate || "";
   const customName = req.query.filename || "";
 
-  return getEventData(id, start, end).then(data => {
+  return getEventData(id, listing_id, start, end).then(data => {
     const { filename, events } = data;
     return respondWith(res, customName || filename, events);
   }).catch(err => {
@@ -59,16 +53,21 @@ function get(req, res, next) {
 }
 
 // promise a structure containing: filename and events.
-function getEventData(id, start, end) {
+function getEventData(id, listing_id, start, end) {
   let filename;
   let buildEvents;
   const cal= config.cal;
-  if (id && start && end) {
-    buildEvents = Promise.reject("expected either an id or date range");
+
+  if (id && (start || end || listing_id)) {
+    buildEvents = Promise.reject("expected only an id, listing_id, or date range");
   } else if (id) {
-    filename = `${cal.filename}-${id}` + cal.ext;
+    filename = `${cal.filename}-event-${id}` + cal.ext;
     // ex. shift-calendar-12414.ics
     buildEvents = buildOne(id);
+  } else if (listing_id) {
+    filename = `${cal.filename}-series-${listing_id}` + cal.ext;
+    // ex. shift-calendar-12414.ics
+    buildEvents = buildSeries(listing_id);
   } else if (start || end) {
     // ex. shift-calendar-2001-06-02-to-2022-01-01.ics
     filename = `${cal.filename}-${start}-to-${end}` + cal.ext;
@@ -105,11 +104,22 @@ function respondWith(res, filename, events) {
 // ---------------------------------
 
 // Promise all of the occurrences of a single event in ical format as a string.
-// id is a calevent id.
+// id is a caldaily id.
 function buildOne(id) {
+  return CalDaily.getByDailyID(id).then((daily) => {
+    if (!daily) {
+      return Promise.reject("no such event");
+    }
+    return buildEntries([daily]);
+  });
+}
+
+// Promise all of the occurrences of a single event in ical format as a string.
+// id is a calevent id.
+function buildSeries(id) {
   return CalDaily.getByEventID(id).then((dailies) => {
     if (!dailies.length) {
-      return Promise.reject("no such events");
+      return Promise.reject("no such listing");
     }
     return buildEntries(dailies);
   });

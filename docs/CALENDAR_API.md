@@ -37,7 +37,7 @@ URL parameters:
   * if not provided, current date is used
 * `id`:
   * `caldaily` event ID (for a single event occurrence)
-  * if `id` is provided, and error will be thrown if `listing_id`, `startdate`, or `enddate` are also provided
+  * if `id` is provided, an error will be thrown if `listing_id`, `startdate`, or `enddate` are also provided
 * `listing_id`:
   * `calevent` event ID (for all event occurrences in a series)
   * if `listing_id` is provided, it takes precedence over `startdate` and `enddate`; the date range will be ignored
@@ -184,10 +184,8 @@ Example requests:
 * `/ics.php?listing_id=1001`
 
 URL parameters:
-* `id`: `calevent` ID (deprecated ‡)
-* `listing_id`: `calevent` ID
-
-‡ **Note:** In the future, the `id` parameter will instead be used for a single occurrence (`caldaily` event ID). If you want the current `id` response for a series of events, use `listing_id` instead.
+* `id`: `caldaily` event ID (for a single event occurrence)
+* `listing_id`: `calevent` event ID (for all event occurrences in a series)
 
 Errors:
 * status codes: `400`, `404`
