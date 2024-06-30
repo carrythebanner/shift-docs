@@ -2,87 +2,106 @@ $(document).ready(function() {
 
     var container = $('#mustache-html');
 
-    function getEventHTML(options, callback) {
-        var url = '/api/events.php?';
-        if (options.id) {
-            url += 'id=' + options.id;
-        } else if (options.startdate && options.enddate) {
-            // these are dayjs objects.
-            url += 'startdate=' + options.startdate.format("YYYY-MM-DD") +
-                   '&enddate=' + options.enddate.format("YYYY-MM-DD");
-        } else {
-            throw Error("requires id or range");
+    const baseURL = window.location.origin;
+    const headers = {
+      "Accept": "application/json",
+      'Api-Version': API_VERSION
+    };
+
+    async function getEvents(url) {
+        const response = await fetch(url, { headers } );
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
         }
 
-        $.ajax({
-            url: url,
-            headers: { 'Api-Version': API_VERSION },
-            type: 'GET',
-            success: function(data) {
-                var groupedByDate = [];
+		return await response.json();
+    }
 
-                var mustacheData = { dates: [] };
-                $.each(data.events, function( index, value ) {
+    async function getEventById(options) {
+        const url = new URL('/api/events.php', baseURL);
+        url.searchParams.set('id', options.id);
 
-                    var date = dayjs(value.date).format('dddd, MMMM D, YYYY');
-                    if (groupedByDate[date] === undefined) {
-                        groupedByDate[date] = {
-                            yyyymmdd: value.date,
-                            date: date,
-                            events: []
-                        };
-                        mustacheData.dates.push(groupedByDate[date]);
-                    }
+        const events = (await getEvents(url)).events;
+        return events;
+    }
 
-                    value.displayStartTime = dayjs(value.time, 'hh:mm:ss').format('h:mm A');
-                    value.displayDate = dayjs(value.date).format('ddd, MMM D, YYYY');
-                    if (value.endtime) {
-                      value.displayEndTime = dayjs(value.endtime, 'hh:mm:ss').format('h:mm A');
-                    }
+    async function getEventsRange(options, callback) {
+        // these are dayjs objects.
+        let startdate = options.startdate.format("YYYY-MM-DD");
+        let enddate = options.enddate.format("YYYY-MM-DD");
 
-                    value.audienceLabel = container.getAudienceLabel(value.audience);
-                    value.areaLabel = container.getAreaLabel(value.area);
-                    value.mapLink = container.getMapLink(value.address);
+        const url = new URL('/api/events.php', baseURL);
+        url.searchParams.set('startdate', startdate);
+        url.searchParams.set('enddate', enddate);
 
-                    if (options.show_details) {
-                        value.expanded = true;
-                    }
-                    value.webLink = container.getWebLink(value.weburl);
-                    value.contactLink = container.getContactLink(value.contact);
+        const events = (await getEvents(url)).events;
+        // TODO return json.events instead of calling buildEventHTML here
+        buildEventHTML(events, options, callback);
+    }
 
-                    value.shareLink = '/calendar/event-' + value.caldaily_id;
-                    value.exportlink = '/api/ics.php?id=' + value.id;
+    function buildEventHTML(events, options, callback) {
+        var groupedByDate = [];
 
-                    groupedByDate[date].events.push(value);
-                });
+        var mustacheData = { dates: [] };
+        $.each(events, function( index, value ) {
 
-                for ( var date in groupedByDate )  {
-                    groupedByDate[date].events.sort(container.compareTimes);
-                }
-                var template = $('#view-events-template').html();
-                var info = Mustache.render(template, mustacheData);
-                if (options.id) {
-                    // only set on individual ride pages
-                    var event = mustacheData.dates[0].events[0];
-                    $('meta[property="og:title"]')[0].setAttribute("content", event.title);
-                    if (event.printdescr) {
-                        $('meta[property="og:description"]')[0].setAttribute("content", event.printdescr);
-                    } else {
-                        var desc = event.details.substring(0,250);
-                        $('meta[property="og:description"]')[0].setAttribute("content", desc);
-                    }
-                    document.title = event.title + " - Calendar - " + SITE_TITLE;
-                }
-                callback(info);
+            var date = dayjs(value.date).format('dddd, MMMM D, YYYY');
+            if (groupedByDate[date] === undefined) {
+                groupedByDate[date] = {
+                    yyyymmdd: value.date,
+                    date: date,
+                    events: []
+                };
+                mustacheData.dates.push(groupedByDate[date]);
             }
+
+            value.displayStartTime = dayjs(value.time, 'hh:mm:ss').format('h:mm A');
+            value.displayDate = dayjs(value.date).format('ddd, MMM D, YYYY');
+            if (value.endtime) {
+              value.displayEndTime = dayjs(value.endtime, 'hh:mm:ss').format('h:mm A');
+            }
+
+            value.audienceLabel = container.getAudienceLabel(value.audience);
+            value.areaLabel = container.getAreaLabel(value.area);
+            value.mapLink = container.getMapLink(value.address);
+
+            if (options.show_details) {
+                value.expanded = true;
+            }
+            value.webLink = container.getWebLink(value.weburl);
+            value.contactLink = container.getContactLink(value.contact);
+
+            value.shareLink = '/calendar/event-' + value.caldaily_id;
+            value.exportlink = '/api/ics.php?id=' + value.id;
+
+            groupedByDate[date].events.push(value);
         });
+
+        for ( var date in groupedByDate )  {
+            groupedByDate[date].events.sort(container.compareTimes);
+        }
+        var template = $('#view-events-template').html();
+        var info = Mustache.render(template, mustacheData);
+        if (options.id) {
+            // only set on individual ride pages
+            var event = mustacheData.dates[0].events[0];
+            $('meta[property="og:title"]')[0].setAttribute("content", event.title);
+            if (event.printdescr) {
+                $('meta[property="og:description"]')[0].setAttribute("content", event.printdescr);
+            } else {
+                var desc = event.details.substring(0,250);
+                $('meta[property="og:description"]')[0].setAttribute("content", desc);
+            }
+            document.title = event.title + " - Calendar - " + SITE_TITLE;
+        }
+        callback(info);
     }
 
     // default range of days to show.
     const dayRange = 10;
 
     // compute range and details settings from the url options.
-    // the returned object gets passed to getEventHTML().
+    // the returned object gets passed to getEventsRange().
     function getInitialView(options) {
         const today = dayjs().startOf('day');
         const start = dayjs(options.startdate); // if start or end are missing ( from the url )
@@ -118,7 +137,7 @@ $(document).ready(function() {
 
         // build the events list:
         // range is inclusive -- all rides on end date are included, even if they start at 11:59pm
-        getEventHTML(view, function (eventHTML) {
+        getEventsRange(view, function (eventHTML) {
              // on PP pages only allow grid view
              // otherwise, add the template to toggle.
              if (!options.pp) {
@@ -138,7 +157,7 @@ $(document).ready(function() {
                       view.startdate = view.enddate.add(1, 'day');
                       view.enddate = view.startdate.add(dayRange, 'day');
                       // add new events to the end of those we've already added.
-                      getEventHTML(view, function(eventHTML) {
+                      getEventsRange(view, function(eventHTML) {
                           $('#load-more').before(eventHTML);
                           lazyLoadEventImages();
                       });
@@ -147,18 +166,30 @@ $(document).ready(function() {
         });
     }
 
-    function viewEvent(id) {
+    async function viewEvent(id) {
         container.empty()
             .append($('#show-all-template').html())
             .append($('#scrollToTop').html());
 
-        getEventHTML({
+        let options = {
             id: id,
             show_details: true // always expand details for a single event
-        }, function (eventHTML) {
+        };
+        let callback = function (eventHTML) {
             container.append(eventHTML);
             lazyLoadEventImages();
-        });
+        };
+
+        try {
+          event = await getEventById(options);
+          buildEventHTML(event, options, callback);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function requestFailure() {
+        console.log ('hey');
     }
 
     function viewAddEventForm(id, secret) {
