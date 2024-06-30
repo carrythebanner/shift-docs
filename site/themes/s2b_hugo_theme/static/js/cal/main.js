@@ -3,8 +3,10 @@ $(document).ready(function() {
     var container = $('#mustache-html');
 
     const baseURL = window.location.origin;
+    const eventsURL = new URL('/api/events.php', baseURL);
+    const icsURL = new URL('/api/ics.php', baseURL);
     const headers = {
-      "Accept": "application/json",
+      'Accept': 'application/json',
       'Api-Version': API_VERSION
     };
 
@@ -18,7 +20,7 @@ $(document).ready(function() {
     }
 
     async function getEventById(options) {
-        const url = new URL('/api/events.php', baseURL);
+        const url = new URL(eventsURL);
         url.searchParams.set('id', options.id);
 
         const events = (await getEvents(url)).events;
@@ -30,7 +32,7 @@ $(document).ready(function() {
         let startdate = options.startdate.format("YYYY-MM-DD");
         let enddate = options.enddate.format("YYYY-MM-DD");
 
-        const url = new URL('/api/events.php', baseURL);
+        const url = new URL(eventsURL);
         url.searchParams.set('startdate', startdate);
         url.searchParams.set('enddate', enddate);
 
@@ -71,8 +73,9 @@ $(document).ready(function() {
             value.webLink = container.getWebLink(value.weburl);
             value.contactLink = container.getContactLink(value.contact);
 
-            value.shareLink = '/calendar/event-' + value.caldaily_id;
-            value.exportlink = '/api/ics.php?id=' + value.id;
+            let exportURL = new URL(icsURL);
+            exportURL.searchParams.set('id', value.id);
+            value.exportlink = exportURL.toString();
 
             groupedByDate[date].events.push(value);
         });
@@ -186,10 +189,6 @@ $(document).ready(function() {
         } catch (error) {
             console.error(error);
         }
-    }
-
-    function requestFailure() {
-        console.log ('hey');
     }
 
     function viewAddEventForm(id, secret) {
