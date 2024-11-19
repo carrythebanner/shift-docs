@@ -10,6 +10,7 @@
     let $dateSelected;
     // html template from #mustache-select-month
     let monthTemplate;
+    let dateStatusesTemplate;
     // these two start at the current month
     // and grow to encompass the range of months displayed
     // ( generated ) by the date picker.
@@ -53,6 +54,7 @@
         $datePicker = $("#date-picker");
         // template for a single month
         monthTemplate = $('#mustache-select-month').html();
+        dateStatusesTemplate = $('#mustache-datestatuses').html();
 
         initDatePicker();
 
@@ -98,7 +100,8 @@
                 }
                 $e.toggleClass('selected', dateMap[date]['selected']);
                 $dateSelected.html("");
-                buildSortedDatesListHTML($dateSelected, dateStatuses);
+                $dateSelected.append(buildSortedDatesListHTML(dateStatuses));
+                // buildSortedDatesListHTML($dateSelected, dateStatuses);
 
                 return false;
             }
@@ -107,53 +110,46 @@
 
         // Setup the month table scroll checks
         $dateSelect.scroll(checkBounds);
-        buildSortedDatesListHTML($dateSelected, dateStatuses);
-//         $dateSelected.append(buildSortedDatesListHTML($dateSelected, dateStatuses));
+        $dateSelected.append(buildSortedDatesListHTML(dateStatuses));
     };
 
     // generate the "selected days" list
-    function buildSortedDatesListHTML(list, dateStatuses) {
+    function buildSortedDatesListHTML(dateStatuses) {
         dateStatuses.sort(function(a, b){
             // Sort dateStatuses in ascending order for display
             return dayjs(a.date).diff( dayjs(b.date) );
         }).forEach(function(dateStatus) {
-            // Display null values as empty strings
-//             var dateStatus['id'] = dateStatus['id'] ? dateStatus['id'] : "";
-//             var dateStatus['newsflash'] = dateStatus['newsflash'] ? dateStatus['newsflash'] : "";
-//             var dateStatus['scheduled'] = dateStatus['status'] === 'A' ? true : false;
-//             var dateStatus['cancelled'] = dateStatus['status'] === 'C' ? true : false;
+            // Displays null values as empty strings
+//             dateStatus['id'] = dateStatus['id'] ? dateStatus['id'] : "";
+//             dateStatus['newsflash'] = dateStatus['newsflash'] ? dateStatus['newsflash'] : "";
+            dateStatus['scheduled'] = dateStatus['status'] === 'A' ? true : false;
+            dateStatus['cancelled'] = dateStatus['status'] === 'C' ? true : false;
 
-//             var dateStatus['id'] = '12345';
-//             var dateStatus['newsflash'] = "test";
-//             var dateStatus['scheduled'] = true;
-//             var dateStatus['cancelled'] = false;
-
-            var dateStatusId = dateStatus['id'] ? dateStatus['id'] : "";
-            var dateStatusNewsFlash = dateStatus['newsflash'] ? dateStatus['newsflash'] : "";
-            var cancelledSelected = dateStatus['status'] === 'C' ? "selected='selected'" : "";
-            var scheduledSelected =  dateStatus['status'] === 'A' ? "selected='selected'" : "";
+//             var dateStatusId = dateStatus['id'] ? dateStatus['id'] : "";
+//             var dateStatusNewsFlash = dateStatus['newsflash'] ? dateStatus['newsflash'] : "";
+//             var cancelledSelected = dateStatus['status'] === 'C' ? "selected='selected'" : "";
+//             var scheduledSelected =  dateStatus['status'] === 'A' ? "selected='selected'" : "";
 
             // Append selected date
-             list.append([
-                 "<li data-id='" + dateStatusId + "'>",
-                     "<span >" + dateStatus['date'] + "</span>",
-                     "<select class='status-selector'>",
-                         "<option value='A' " + scheduledSelected + ">Scheduled</option>",
-                         "<option value='C' " + cancelledSelected + ">Cancelled</option>",
-                     "</select>",
-                     "<label>",
-                         "newsflash message (optional)",
-                         "<input ",
-                             "type='text' ",
-                             "class='newsflash' ",
-                             "value='" + dateStatusNewsFlash,
-                         "'>",
-                     "</label>",
-                 "</li>",
-             ].join(""));
+//              list.append([
+//                  "<li data-id='" + dateStatusId + "'>",
+//                      "<span >" + dateStatus['date'] + "</span>",
+//                      "<select class='status-selector'>",
+//                          "<option value='A' " + scheduledSelected + ">Scheduled</option>",
+//                          "<option value='C' " + cancelledSelected + ">Cancelled</option>",
+//                      "</select>",
+//                      "<label>",
+//                          "newsflash message (optional)",
+//                          "<input ",
+//                              "type='text' ",
+//                              "class='newsflash' ",
+//                              "value='" + dateStatusNewsFlash,
+//                          "'>",
+//                      "</label>",
+//                  "</li>",
+//              ].join(""));
         });
-//         dateStatusesTemplate = $('#mustache-datestatuses').html();
-//         return Mustache.render(dateStatusesTemplate, dateStatuses);
+        return Mustache.render(dateStatusesTemplate, {dateStatuses});
     }
 
     function isToday(date) {
