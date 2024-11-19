@@ -132,7 +132,7 @@
         rendered = Mustache.render(template, shiftEvent);
         callback(rendered);
 
-       $('#date-select').setupDatePicker(shiftEvent['datestatuses'] || []);
+        $('#date-select').setupDatePicker(shiftEvent['datestatuses'] || []);
 
         if (shiftEvent['datestatuses'].length === 0) {
             $('.save-button').prop('disabled', true);
