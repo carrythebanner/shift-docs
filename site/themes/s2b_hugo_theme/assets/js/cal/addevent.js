@@ -133,7 +133,6 @@
         callback(rendered);
 
        $('#date-select').setupDatePicker(shiftEvent['datestatuses'] || []);
-//         $('#date-select').setupDatePicker([]);
 
         if (shiftEvent['datestatuses'].length === 0) {
             $('.save-button').prop('disabled', true);

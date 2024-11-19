@@ -101,7 +101,6 @@
                 $e.toggleClass('selected', dateMap[date]['selected']);
                 $dateSelected.html("");
                 $dateSelected.append(buildSortedDatesListHTML(dateStatuses));
-                // buildSortedDatesListHTML($dateSelected, dateStatuses);
 
                 return false;
             }
@@ -119,35 +118,8 @@
             // Sort dateStatuses in ascending order for display
             return dayjs(a.date).diff( dayjs(b.date) );
         }).forEach(function(dateStatus) {
-            // Displays null values as empty strings
-//             dateStatus['id'] = dateStatus['id'] ? dateStatus['id'] : "";
-//             dateStatus['newsflash'] = dateStatus['newsflash'] ? dateStatus['newsflash'] : "";
             dateStatus['scheduled'] = dateStatus['status'] === 'A' ? true : false;
             dateStatus['cancelled'] = dateStatus['status'] === 'C' ? true : false;
-
-//             var dateStatusId = dateStatus['id'] ? dateStatus['id'] : "";
-//             var dateStatusNewsFlash = dateStatus['newsflash'] ? dateStatus['newsflash'] : "";
-//             var cancelledSelected = dateStatus['status'] === 'C' ? "selected='selected'" : "";
-//             var scheduledSelected =  dateStatus['status'] === 'A' ? "selected='selected'" : "";
-
-            // Append selected date
-//              list.append([
-//                  "<li data-id='" + dateStatusId + "'>",
-//                      "<span >" + dateStatus['date'] + "</span>",
-//                      "<select class='status-selector'>",
-//                          "<option value='A' " + scheduledSelected + ">Scheduled</option>",
-//                          "<option value='C' " + cancelledSelected + ">Cancelled</option>",
-//                      "</select>",
-//                      "<label>",
-//                          "newsflash message (optional)",
-//                          "<input ",
-//                              "type='text' ",
-//                              "class='newsflash' ",
-//                              "value='" + dateStatusNewsFlash,
-//                          "'>",
-//                      "</label>",
-//                  "</li>",
-//              ].join(""));
         });
         return Mustache.render(dateStatusesTemplate, {dateStatuses});
     }
