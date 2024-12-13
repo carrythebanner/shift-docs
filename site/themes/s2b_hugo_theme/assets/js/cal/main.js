@@ -47,6 +47,9 @@ $(document).ready(function() {
                     if (options.show_details) {
                         value.expanded = true;
                     }
+                    if (options.id) {
+                        value.singleevent = true;
+                    }
                     value.webLink = container.getWebLink(value.weburl);
                     value.contactLink = container.getContactLink(value.contact);
 

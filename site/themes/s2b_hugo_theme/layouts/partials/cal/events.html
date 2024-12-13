@@ -35,13 +35,13 @@
 
 <script id="view-events-template" type="text/template">
   [[#dates]]
-  <div data-date="[[yyyymmdd]]" class="date[[#preview]] preview[[/preview]]">
+  <div class="date[[#preview]] preview[[/preview]]">
     <h2>[[date]]</h2>
 
     <ul class="events-list">
       [[#events]]
 
-      <li class="event row [[#cancelled]]cancelled[[/cancelled]] [[#featured]]featured[[/featured]]" data-event-id="[[id]]">
+      <li class="event row [[#cancelled]]cancelled[[/cancelled]] [[#featured]]featured[[/featured]]">
         [[#featured]]<p class="featured-text" id="featured[[caldaily_id]]"><span aria-hidden="true">★ </span>Featured Event<span aria-hidden="true"> ★</span></p>[[/featured]]
         <div class="time col-xs-2">
           [[#cancelled]]<del>[[/cancelled]]
@@ -82,20 +82,27 @@
                     [[/ newsflash ]]
                     [[/ featured ]]
 
+<!-- 
                     <button type="button" aria-expanded="[[^ expanded ]]false[[/ expanded ]][[# expanded ]]true[[/ expanded ]]" class="expand-details" data-toggle-target="#event-details-[[caldaily_id]]">
                       <svg class="icon expand" role="img" aria-hidden="true">
                         <use href="#icon-arrow-down" />
                       </svg>
+ -->
 
                       [[#cancelled]]<del>[[/cancelled]]
 
-                      [[title]]
+                      <a
+                        [[^preview]]
+                            href="[[shareLink]]"
+                        [[/preview]]
+                        rel="bookmark">
+                        [[title]]</a>
 
                       [[#cancelled]]
                     </del> <ins><span class="cancelled-text">cancelled</span></ins>
                       [[/cancelled]]
 
-                    </button>
+<!--                     </button> -->
                   </h3>
 
                   [[#newsflash]]
@@ -137,7 +144,15 @@
 
         <div class="col-xs-2">
         </div>
-        <div class="event-details col-xs-10" id="event-details-[[caldaily_id]]" [[^ expanded ]]hidden[[/ expanded ]] >
+
+            <!-- class="event-details col-xs-10" id="event-details-[[caldaily_id]]" -->
+        [[^ singleevent]]
+        <details [[# expanded ]]open[[/ expanded ]]>
+        <div class="col-xs-2">
+        </div>
+        [[/ singleevent]]
+        <div class="event-details col-xs-10">
+<!--           <summary>Event details</summary> -->
 
         [[#cancelled]]<del>[[/cancelled]]
 
@@ -226,7 +241,7 @@
                   [[/preview]]
                   class="share-link"
                   rel="bookmark">
-                  Sharable link</a>
+                  Permalink</a>
               </li>
               <li>
                 <a
@@ -258,7 +273,8 @@
           [[/preview]]
 
           [[#cancelled]]</del>[[/cancelled]]
-  </div>
+    </div>
+  [[^singleevent]]</details>[[/singleevent]]
   </li>
   [[/events]]
   </ul>
