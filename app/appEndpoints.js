@@ -45,8 +45,10 @@ const endpoints = [
   "manage_event",
   "retrieve_event",
   "search",
-  "ride_count"
+  "ride_count",
+  "about"
 ];
+exports.endpoints = endpoints;
 
 // host each of those endpoint files at a php-like url:
 // note: require() is synchronous.

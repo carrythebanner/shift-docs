@@ -45,8 +45,17 @@ const config = {
      const base = `${siteHost}${config.site.path}`;
      return base + parts.join("/");
     },
+    aboutPage() {
+      return config.site.url("pages/mission_statement/");
+    },
     helpPage() {
       return config.site.url("pages/calendar-faq/");
+    },
+    donatePage() {
+      return config.site.url("pages/donate/");
+    },
+    apiDocumentationPage() {
+      return "https://github.com/shift-org/shift-docs/blob/guidelines/docs/CALENDAR_API.md";
     },
     staticFiles,
     devEndpoints: !staticFiles ? null : [{
@@ -118,7 +127,7 @@ const config = {
   crawl: {
     image: 'https://www.shift2bikes.org/images/shiftLogo_plain.gif',
     title: 'Shift/Pedalpalooza Calendar',
-    description: `Find fun bike events and make new friends!` +
+    description: `Find fun bike events and make new friends! ` +
       `Shift helps groups and individuals to promote their "bike fun" events.`,
   },
   cal: {
