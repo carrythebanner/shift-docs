@@ -31,7 +31,24 @@
                 <a href="/calendar/">Show all upcoming events</a>
 
                 <!-- event listing -->
-                <div id="mustache-html" class="container"></div>
+                <!-- <div id="mustache-html" class="container"></div> -->
+
+                <!-- fetch all event .json files from data folder -->
+                {{ $rides := site.Data.rides }}
+
+                <!-- get ID and data for each -->
+                {{ range $eventID, $eventsArray := $rides }}
+                  <!-- get first array item from `events` key -->
+                  {{ $eventData := index $eventsArray.events 0 }}
+
+                  <!-- example single property, referenced by name -->
+                  <div class="date">
+
+					<h2>{{ time.Format "January 02, 2006" $eventData.date }}</h2>
+					<h3 style="color: revert;">{{ $eventData.title }}</h3>
+
+                  </div>
+                {{ end }}
 
                 {{ partial "alert_banner.html" . }}
 
